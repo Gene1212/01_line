@@ -6,7 +6,7 @@ run: main
 	./main
 
 main: $(OBJECTS)
-	$(CC) -o main $(OBJECTS)
+	$(CC) -o main $(OBJECTS) -lm
 
 main.o: main.c display.h draw.h ml6.h
 	$(CC) -c main.c

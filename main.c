@@ -1,10 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "ml6.h"
 #include "display.h"
 #include "draw.h"
+
+void test()
+{
+  screen sc;
+  color clr;
+
+  clear_screen(sc);
+
+  for (int x = 0; x < 500; x += 30)
+  {
+    for (int y = 0; y < 500; y += 30)
+    {
+      if (((x - 250) * (x - 250)) + ((y - 250) * (y - 250)) <= (225 * 225))
+      {
+        double d = sqrt(((x - 250) * (x - 250)) + ((y - 250) * (y - 250)));
+
+        clr.red = 255;
+        clr.green = 255;
+        clr.blue = ((int)d - 50) % 255;
+        //printf("x: %d y: %d d: %f\n",x,y,d);
+
+        draw_line(x, y, 250, 250, sc, clr);
+      }
+    }
+  }
+
+  save_extension(sc, "test.png");
+}
 
 int main()
 {
@@ -48,4 +77,6 @@ int main()
 
   display(s);
   save_extension(s, "lines.png");
+
+  //test();
 }
